@@ -2,4 +2,8 @@
 
 (defn remove-extra-consecutive
   [s max-consecutive-chars]
-  (apply str (flatten (map (partial take max-consecutive-chars) (partition-by char s)))))
+  "Return another string that is similar to the input string, but with certain characters removed. It's going to remove characters from consecutive runs of the same character, where the length of the run is greater than the input parameter."
+  (->> (partition-by char s)
+       (map (partial take max-consecutive-chars))
+       (flatten)
+       (apply str)))
